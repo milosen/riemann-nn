@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # output images
-img/
+img_out/
