@@ -1,25 +1,34 @@
 # Understanding "Principles of Riemannian Geometry in Neural Networks" by Michael Hauser and Asok Ray
+This project serves as a playground for experiments inspired by the paper 
+[Principles of Riemanian Geometry in Neural Networks](https://papers.nips.cc/paper/6873-principles-of-riemannian-geometry-in-neural-networks).
+## Main ideas
+The experimental setup consists of training a deep neural network with two neurons per layer to separate two classes of 
+data points. Plotting each data point's activations on a 2d scatter plot on every layer helps to gain an understanding 
+of how the data transforms geometrically as it passes through the network. Furthermore, it enables the interpretation of 
+NNs as sequential coordinate transformations, which means that the activation of a single neuron is one coordinate of 
+the respective layer's coordinate system.
 
-## Topics to look into
-* geomstat + pytorch?
-* understanding dimensionality reduction
-    - locally linear embedding
-    - why euclidean metric in output space
-* lie group actions on fibre bundles
-* submersion / immersion of manifolds
-* connection (principal bundle)
-* residual neural networks recap
+An example of this idea can be seen in the following image. The network is a C2-differentiable network as described in 
+the paper, but with the sigmoid activation in the hidden units.
 
-## Resources on differential geometry and lie groups
-* nice intro to lie groups and lie algebras: https://www.liealgebrasintro.com/publications
-* great theoretical physics blog: http://jakobschwichtenberg.com/
+![Coordinate transormations of a C2-network](img/sigmoid_c2.png)
 
-## Cited By
+Assuming the output space of a neural network is endowed with a euclidean metric (and assuming some additional technical 
+details), the metric tensor from the last layer can be 
+[pulled back](https://en.wikipedia.org/wiki/Pullback_(differential_geometry\)) through the layers to the input space by
 
-* Residual Networks as Flows of Diffeomorphisms (Rousseau, F., Drumetz, L., Fablet, R. 2020 Journal of Mathematical Imaging and Vision)
+![\Large](https://latex.codecogs.com/svg.latex?\Large&space;g_{a_{(l)}{b_{(l)}}}=\overset{\curvearrowleft}{\prod_{l'=L-1}^{l}}\left[J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}J{^{b_{(l+1)}}_{\quad\quad b_{(l)}}}\right]\eta_{a_{(L)}{b_{(L)}})
 
-* State-space representations of deep neural networks (Hauser, M., Gunn, S., Saab, S., Ray, A. 2019 Neural Computation)
+with the jakobian
 
-* Demystifying deep learning: A geometric approach to iterative projections (Panahi, A., Krim, H., Dai, L. 2018 ICASSP, IEEE International Conference on Acoustics, Speech and Signal Processing - Proceedings)
+![\Large J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}=\frac{\partial x^{a_{(l+1)}}}{\partial x^{a_{(l)}}}](https://latex.codecogs.com/svg.latex?\Large&space;J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}=\frac{\partial x^{a_{(l+1)}}}{\partial x^{a_{(l)}}} ) 
 
-* Model-based vs data-driven adaptive control: An overview (Benosman, M. 2018 International Journal of Adaptive Control and Signal Processing)
+written in tensor notation. This ultimately introduces one possible way of measuring distances between data points in 
+the input space.
+
+In the following, the euclidean metric is pulled back from the last layer to the first and the metric tensors are visualized using their 
+principal components to draw ellipses.
+
+![Pullback metric visualized without data points](img/only_tensors_20x20.png)
+
+![Pullback metric visualized with data points](img/tensor.png)
