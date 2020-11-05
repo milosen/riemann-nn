@@ -15,13 +15,13 @@ the paper, but with the sigmoid activation in the hidden units.
 
 Assuming the output space of a neural network is endowed with a euclidean metric (and assuming some additional technical 
 details), the metric tensor from the last layer can be 
-[pulled back](https://en.wikipedia.org/wiki/Pullback_(differential_geometry\)) through the layers to the input space by
+[pulled back](https://en.wikipedia.org/wiki/Isometry#Manifolds) through the layers to the input space by
 
-![\Large](https://latex.codecogs.com/svg.latex?\Large&space;g_{a_{(l)}{b_{(l)}}}=\overset{\curvearrowleft}{\prod_{l'=L-1}^{l}}\left[J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}J{^{b_{(l+1)}}_{\quad\quad b_{(l)}}}\right]\eta_{a_{(L)}{b_{(L)}})
+![Pullback](img/pullback.png)
 
 with the jakobian
 
-![\Large J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}=\frac{\partial x^{a_{(l+1)}}}{\partial x^{a_{(l)}}}](https://latex.codecogs.com/svg.latex?\Large&space;J{^{a_{(l+1)}}_{\quad\quad a_{(l)}}}=\frac{\partial x^{a_{(l+1)}}}{\partial x^{a_{(l)}}} ) 
+![Jacobian](img/jacobi.png) 
 
 written in tensor notation. This ultimately introduces one possible way of measuring distances between data points in 
 the input space.
